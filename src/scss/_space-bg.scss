@@ -1,0 +1,136 @@
+// based on a codepen https://codepen.io/saransh/pen/BKJun by @screenshake
+
+// Generates $n amount of box-shadows ("stars") of $color with random position
+@function multiple-box-shadow($n, $color: #fff) {
+	$value: "#{random(2000)}px #{random(2000)}px #{$color}";
+	@for $i from 2 through $n {
+		$value: "#{$value}, #{random(2000)}px #{random(2000)}px #{$color}";
+	}
+	@return unquote($value);
+}
+
+$space-1: multiple-box-shadow(700);
+$space-2: multiple-box-shadow(200);
+$space-2-blue: multiple-box-shadow(250, #b7e7ec75);
+$space-2-red: multiple-box-shadow(12, rgba(255, 0, 0, 0.445));
+$space-2-black: multiple-box-shadow(18, rgba(0, 0, 0, 0.486));
+$space-2-yellow: multiple-box-shadow(30, rgba(255, 255, 0, 0.384));
+$space-3: multiple-box-shadow(100);
+
+.bg-space {
+	position: fixed;
+	background: transparent;
+	border-radius: 100%;
+	z-index: -700;
+
+	&::after {
+		content: " ";
+		position: fixed;
+		top: 2000px;
+		background: transparent;
+		border-radius: 100%;
+		z-index: -700;
+	}
+}
+
+.space-1 {
+	width: 1px;
+	height: 1px;
+	animation: animStar 50s linear infinite;
+	box-shadow: $space-1;
+
+	&::after {
+		width: 1px;
+		height: 1px;
+		box-shadow: $space-1;
+	}
+}
+
+.space-2 {
+	width: 2px;
+	height: 2px;
+	animation: animStar 100s linear infinite;
+	box-shadow: $space-2;
+
+	&::after {
+		width: 2px;
+		height: 2px;
+		box-shadow: $space-2;
+	}
+}
+
+.space-2-blue {
+	width: 4px;
+	height: 4px;
+	animation: animStar 100s linear infinite;
+	box-shadow: $space-2-blue;
+
+	&::after {
+		width: 4px;
+		height: 4px;
+		box-shadow: $space-2-blue;
+	}
+}
+.space-2-black {
+	width: 4px;
+	height: 4px;
+	animation: animStar 80s linear infinite;
+	box-shadow: $space-2-black;
+
+	&::after {
+		width: 4px;
+		height: 4px;
+		box-shadow: $space-2-black;
+	}
+}
+.space-2-red {
+	width: 4px;
+	height: 4px;
+	animation: animStar 110s linear infinite;
+	box-shadow: $space-2-red;
+
+	&::after {
+		width: 4px;
+		height: 4px;
+		box-shadow: $space-2-red;
+	}
+}
+.space-2-yellow {
+	width: 4px;
+	height: 4px;
+	animation: animStar 70s linear infinite;
+	box-shadow: $space-2-yellow;
+
+	&::after {
+		width: 4px;
+		height: 4px;
+		box-shadow: $space-2-yellow;
+	}
+}
+
+.space-3 {
+	width: 3px;
+	height: 3px;
+	animation: animStar 150s linear infinite;
+	box-shadow: $space-3;
+
+	&::after {
+		width: 3px;
+		height: 3px;
+		box-shadow: $space-3;
+	}
+}
+
+@keyframes animStar {
+	from {
+		transform: translateY(0px);
+	}
+	to {
+		transform: translateY(-2000px);
+	}
+}
+/* Break (stop) the star-flow if user prefers reduced motion */
+@media (prefers-reduced-motion) {
+	@keyframes animStar {
+	}
+}
