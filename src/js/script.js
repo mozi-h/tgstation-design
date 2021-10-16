@@ -82,27 +82,18 @@ window.addEventListener("load", () => {
 	// Manual background animation toggle
 	// #toggleBgAnimation
 	settingsHandler.bgAnimation = {
-		breakBgAnimStylesheet: null,
-		bgAnimToggler: document.getElementById("toggleBgAnimation"),
-		set: function (enabled) {
-			if (enabled) {
-				if (!this.breakBgAnimStylesheet) return; // Not broken anyways
+		bgAnimationContainer: document.getElementById("bgAnimation"),
+		bgAnimationToggler: document.getElementById("toggleBgAnimation"),
+		set: function (enable) {
+			if (enable) {
+				// Resume bg animation
+				this.bgAnimationContainer.classList.remove("pause");
 
-				// Unbreak bg animation
-				this.breakBgAnimStylesheet.remove();
-				this.breakBgAnimStylesheet = null;
-
-				// Save status (not saved defaults to on)
+				// Save status (remove, as it defaults to on)
 				localStorage.removeItem("bgAnimation");
 			} else {
-				if (this.breakBgAnimStylesheet) return; // Already broken
-
-				// Break bg animation
-				this.breakBgAnimStylesheet = document.createElement("style", {
-					type: "text/css",
-				});
-				this.breakBgAnimStylesheet.innerText = "@keyframes animStar {}";
-				document.head.appendChild(this.breakBgAnimStylesheet);
+				// Pause bg animation
+				this.bgAnimationContainer.classList.add("pause");
 
 				// Save status
 				localStorage.setItem("bgAnimation", "false");
@@ -110,14 +101,16 @@ window.addEventListener("load", () => {
 		},
 		initialize: function () {
 			var storedStatus = localStorage.getItem("bgAnimation");
+			// Default to on
 			if (storedStatus === null) storedStatus = true;
+			// If status is stored, only activate if it is exactly "true" (localStorage only stores strings)
 			else storedStatus = storedStatus === "true";
 
-			this.bgAnimToggler.checked = storedStatus;
+			this.bgAnimationToggler.checked = storedStatus;
 			this.set(storedStatus);
 
 			// Bind settingsHandler.bgAnimation.set to its settings checkbox toggler
-			this.bgAnimToggler.addEventListener("change", function (event) {
+			this.bgAnimationToggler.addEventListener("change", function (event) {
 				settingsHandler.bgAnimation.set(this.checked);
 			});
 		},
