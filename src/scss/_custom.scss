@@ -8,8 +8,6 @@
 
 @import "space-bg";
 
-
-
 // Link formatting
 a {
 	font-family: $font-family-monospace;
@@ -132,7 +130,7 @@ small,
 section#alerts {
 	text-align: center;
 
-	:first-child {
+	> div:first-of-type {
 		margin-top: 2rem !important;
 	}
 }
