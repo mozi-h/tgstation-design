@@ -135,6 +135,12 @@ section#alerts {
 	}
 }
 
+section#userbanner img {
+	width: 728px;
+	height: 90px;
+	background-color: $dark-500;
+}
+
 #toggleBgAnimationOverriddenPRM {
 	display: none;
 }
