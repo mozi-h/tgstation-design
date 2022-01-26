@@ -9,11 +9,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Clean dist branch
-        steps:
-          - name: Checkout dist branch
-            uses: actions/checkout@v2
-            with:
-              ref: dist
+        uses: actions/checkout@v2
+        with:
+          ref: dist
       - run: rm -rf *
       - name: Checkout master branch
         uses: actions/checkout@master
