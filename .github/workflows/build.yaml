@@ -4,19 +4,17 @@ on:
       - master
 
 jobs:
-  clean_dist:
-    name: Clean dist branch
-    steps:
-      - name: Checkout dist branch
-        uses: actions/checkout@v2
-        with:
-          ref: dist
-      - name: Remove everything
-        run: rm -rf *
-  copy_to_dist:
+  build_to_dist:
     name: Copy and build to dist
     runs-on: ubuntu-latest
     steps:
+      - name: Clean dist branch
+        steps:
+          - name: Checkout dist branch
+            uses: actions/checkout@v2
+            with:
+              ref: dist
+      - run: rm -rf *
       - name: Checkout master branch
         uses: actions/checkout@master
       - name: Merge master -> dist
