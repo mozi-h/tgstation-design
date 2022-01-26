@@ -5,10 +5,15 @@ on:
 
 jobs:
   build_to_dist:
-    name: Build to dist branch
+    name: Copy and build to dist
     runs-on: ubuntu-latest
     steps:
-      - name: checkout master branch
+      - name: Clean dist branch
+        uses: actions/checkout@v2
+        with:
+          ref: dist
+      - run: rm -rf *
+      - name: Checkout master branch
         uses: actions/checkout@master
       - name: Merge master -> dist
         uses: devmasx/merge-branch@v1.4.0
@@ -17,22 +22,24 @@ jobs:
           from_branch: master
           target_branch: dist
           github_token: ${{ secrets.GITHUB_TOKEN }}
-      - name: checkout dist branch
+      - name: Checkout dist branch
         uses: actions/checkout@v2
         with:
           ref: dist
-      - name: build
+      - name: Set up node
         uses: actions/setup-node@v2
         with:
           node-version: "14"
-      - run: |
+      - name: Build
+        run: |
           npm ci
           npm run build
           shopt -s extglob
           rm -rf !(dist)
           mv ./dist/* .
           rm -d dist
-      - uses: stefanzweifel/git-auto-commit-action@v4
+      - name: Commit
+        uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: build
           branch: dist
