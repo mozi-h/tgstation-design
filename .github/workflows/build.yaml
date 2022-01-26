@@ -1,33 +1,38 @@
-build:
-name: Build to dist branch
-runs-on: ubuntu-latest
+on:
+  push:
+    branches:
+      - master
 
-steps:
-  - name: checkout master branch
-    uses: actions/checkout@master
-  - name: Merge master -> dist
-    uses: devmasx/merge-branch@v1.4.0
-    with:
-      type: now
-      from_branch: master
-      target_branch: dist
-      github_token: ${{ secrets.GITHUB_TOKEN }}
-  - name: checkout dist branch
-    uses: actions/checkout@v2
-    with:
-      ref: compiled-master
-  - name: build
-    uses: actions/setup-node@v2
-    with:
-      node-version: "14"
-  - run: |
-      npm ci
-      npm run build
-      shopt -s extglob
-      rm -r !(dist)
-      mv ./dist/* .
-      rm -r dist
-  - uses: stefanzweifel/git-auto-commit-action@v4
-    with:
-      commit_message: build
-      branch: compiled-master
+jobs:
+  build_to_dist:
+    name: Build to dist branch
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout master branch
+        uses: actions/checkout@master
+      - name: Merge master -> dist
+        uses: devmasx/merge-branch@v1.4.0
+        with:
+          type: now
+          from_branch: master
+          target_branch: dist
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: checkout dist branch
+        uses: actions/checkout@v2
+        with:
+          ref: compiled-master
+      - name: build
+        uses: actions/setup-node@v2
+        with:
+          node-version: "14"
+      - run: |
+          npm ci
+          npm run build
+          shopt -s extglob
+          rm -r !(dist)
+          mv ./dist/* .
+          rm -r dist
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: build
+          branch: compiled-master
