@@ -29,9 +29,9 @@ jobs:
           npm ci
           npm run build
           shopt -s extglob
-          rm -r !(dist)
+          rm -rf !(dist)
           mv ./dist/* .
-          rm -r dist
+          rm -d dist
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: build
