@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-      - master
+      - masterXXXXXnope
 
 jobs:
   build_to_dist:
