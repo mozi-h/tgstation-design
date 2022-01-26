@@ -1,4 +1,5 @@
 FROM node:16-bullseye AS builder
+ENV REGISTRY=ghcr.io
 RUN npm i
 RUN npm run build
 
