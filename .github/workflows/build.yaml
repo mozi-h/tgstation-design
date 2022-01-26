@@ -20,7 +20,7 @@ jobs:
       - name: checkout dist branch
         uses: actions/checkout@v2
         with:
-          ref: compiled-master
+          ref: dist
       - name: build
         uses: actions/setup-node@v2
         with:
