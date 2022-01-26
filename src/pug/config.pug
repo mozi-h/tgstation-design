@@ -5,15 +5,16 @@
 		{
 			type: "warning", // contextual class https://getbootstrap.com/docs/5.1/components/alerts/#examples
 			text: "This is an important announcement", // Body text
+			icon: "exclamation-circle", // icon from https://icons.getbootstrap.com/ (optional)
 			// If it should be dismissable, this must be a unique ID. If permanent, remove property
-			dismissibleId: "test-announcement"
+			dismissibleId: "test-announcement",
 		},
 		*/
 		{
-			type: "warning", // contextual class https://getbootstrap.com/docs/5.1/components/alerts/#examples
-			text: "This is an important announcement. It is dismissable", // Body text
-			// If it should be dismissable, this must be a unique ID. If permanent, remove property
-			dismissibleId: "debug-alert"
+			type: "info",
+			text: "You can shift-click a server to auto-join the next round.",
+			dismissibleId: "shitf-click-to-watch-server",
+			icon: "info-circle",
 		},
 	];
 
@@ -26,6 +27,7 @@
 		},
 		{
 			text: "Dropdown Menu Header",
+			href: "#", // only reachable via Mouse 3 (open in new tab)!
 			dropdownId: "navbarDropdown", // must be unique
 			children: [
 				{ href: "#", text: "Link" },
@@ -40,6 +42,7 @@
 		},
 		{
 			text: "Wiki",
+			href: "/wiki",
 			dropdownId: "navbarDropdownWiki",
 			children: [
 				{ href: "/wiki", text: "Main Page" },
@@ -55,6 +58,7 @@
 		},
 		{
 			text: "Patreon",
+			href: "https://www.patreon.com/tgstation",
 			dropdownId: "navbarDropdownPatreon",
 			children: [
 				{ href: "https://www.patreon.com/tgstation", text: "/tg/ Server Patreon" },
@@ -67,6 +71,7 @@
 		},
 		{
 			text: "Cool Shit",
+			href: "https://shop.spreadshirt.com/tgstation13/",
 			dropdownId: "navbarDropdownCool",
 			children: [
 				{ href: "https://shop.spreadshirt.com/tgstation13/", text: "Gear" },
@@ -80,6 +85,7 @@
 		},
 		{
 			text: "Dev",
+			href: "https://github.com/tgstation/tgstation",
 			dropdownId: "navbarDropdownDev",
 			children: [
 				{ href: "https://github.com/tgstation/tgstation", text: "/tg/ Github" },
@@ -89,6 +95,7 @@
 		},
 		{
 			text: "IRC",
+			href: "#",
 			dropdownId: "navbarDropdownIRC",
 			children: [
 				{ href: "irc://irc.rizon.net/tgstation13", text: "#tgstation13" },
@@ -103,6 +110,7 @@
 		},
 		{
 			text: "Related Sites",
+			href: "#",
 			dropdownId: "navbarDropdownRelated",
 			children: [
 				{ type: "text", text: "May Mays" },

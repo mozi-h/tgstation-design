@@ -4,8 +4,14 @@
 
 // Import fonts
 @import "fonts";
-// Import space background
 
+// Bootstrap Icons
+.bi {
+	top: 1px;
+	position: relative;
+}
+
+// Import space background
 @import "space-bg";
 
 // Link formatting
@@ -46,20 +52,6 @@ a.dropdown-item:focus {
 	background-color: $primary;
 	display: inline-block;
 	box-shadow: 2px 2px rgba(0, 0, 0, 0.25);
-}
-
-.card-title-before {
-	width: 10px;
-	content: "";
-	display: inline-block;
-	background: linear-gradient(
-		to bottom right,
-		transparent 0%,
-		transparent 50%,
-		green 50%,
-		green 100%
-	) !important;
-	height: 1em;
 }
 
 .card-body {
@@ -124,6 +116,7 @@ small,
 		opacity: inherit;
 
 		outline: 1px solid red;
+		box-shadow: none;
 	}
 }
 
@@ -133,12 +126,17 @@ section#alerts {
 	> div:first-of-type {
 		margin-top: 2rem !important;
 	}
+
+	i.bi {
+		position: absolute;
+		left: 1rem;
+		transform: translateY(-50%);
+	}
 }
 
-section#userbanner img {
-	width: 728px;
-	height: 90px;
-	background-color: $dark-500;
+section#servers .server-banner {
+	min-width: 232px;
+	min-height: 72px;
 }
 
 #toggleBgAnimationOverriddenPRM {
